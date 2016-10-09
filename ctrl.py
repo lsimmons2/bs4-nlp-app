@@ -2,9 +2,9 @@ import requests
 import json
 
 
-configFile = open('./config.json', 'r')
-config = json.loads(configFile.read())
-configFile.close()
+config_file = open('./config.json', 'r')
+config = json.loads(config_file.read())
+config_file.close()
 
 
 headers = config['alyien']['headers']
