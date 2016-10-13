@@ -1,8 +1,16 @@
 angular.module('App', [])
 .controller('MainController', function($scope, $http){
-  $scope.submitUrl = function(){
-    if($scope.urlForm.$valid){
-      $http.post('/page', $scope.url)
+  $scope.submitText = function(){
+    if($scope.form.$valid){
+      var data = {
+        text: $scope.text,
+        apis: {
+          rosette: $scope.rosette,
+          aylien: $scope.aylien,
+          bitext: $scope.bitext
+        }
+      }
+      $http.post('/page', data)
       .then(function(resp){
         console.log('success resp: ', resp);
       }, function(resp){

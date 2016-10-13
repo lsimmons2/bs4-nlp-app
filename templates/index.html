@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en-us'>
   <head>
-    <script   src="http://code.jquery.com/jquery-3.1.1.js"   integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="   crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -11,14 +11,44 @@
   <body ng-app="App">
     <div class="container" ng-view ng-controller="MainController">
       <h2>Stack NLP App</h2>
-      <form name="urlForm">
+      <form name="form">
         <div class="form-group">
-          <label>Input URL</label>
-          <input class="form-control" placeholder="Enter URL" type="url" ng-model="url"></input>
-          <input class="form-control" value="Submit" type="submit" ng-click="submitUrl()"></input>
+          <label>Input Text</label>
+          <input class="form-control" placeholder="Enter Text" type="text" ng-model="text"></input>
+        </div>
+        <div class="form-group">
+          <div class="api-containter">
+            <h3>Rosette</h3>
+            <input class="form-control" type="checkbox">
+            <ul>
+              <li>Sentiment<input type="checkbox" ng-model="rosette.sentiment"></li>
+              <li>Concepts<input type="checkbox" ng-model="rosette.concepts"></li>
+              <li>Classification<input type="checkbox" ng-model="rosette.classification"></li>
+            </ul>
+          </div>
+          <div class="api-containter">
+            <h3>Aylien</h3>
+            <input class="form-control" type="checkbox">
+            <ul>
+              <li>Sentiment<input type="checkbox" ng-model="aylien.sentiment"></li>
+              <li>Concepts<input type="checkbox" ng-model="aylien.concepts"></li>
+              <li>Classification<input type="checkbox" ng-model="aylien.classification"></li>
+            </ul>
+          </div>
+          <div class="api-containter">
+            <h3>Bitext</h3>
+            <input class="form-control" type="checkbox">
+            <ul>
+              <li>Sentiment<input type="checkbox" ng-model="bitext.sentiment"></li>
+              <li>Concepts<input type="checkbox" ng-model="bitext.concepts"></li>
+              <li>Classification<input type="checkbox" ng-model="bitext.classification"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="form-group">
+          <input class="form-control" value="Submit" type="submit" ng-click="submitText()"></input>
         </div>
       </form>
-      {{url}}
     </div>
   </body>
 </html>
