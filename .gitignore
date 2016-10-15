@@ -1,3 +1,5 @@
 config.json
 notes.txt
 /responses
+.DS_Store
+*.pyc

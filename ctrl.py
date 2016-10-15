@@ -19,7 +19,7 @@ first arg corresponds to endpoint and can be:
 - related (related phrases)
 - unsupervised (semantic labeling)
 '''
-def alyien(analysis, data):
+def aylien(analysis, data):
     if type(analysis) != str:
         return 'analysis arg needs to be of type str'
     if type(data) != str:
@@ -30,9 +30,6 @@ def alyien(analysis, data):
         'text': data
     }
     resp = requests.post(url, headers=headers, data=data)
-    file = open('../responses/alyien/output.json', 'w')
-    file.write(resp.text)
-    file.close()
     print resp
     return resp.text
 

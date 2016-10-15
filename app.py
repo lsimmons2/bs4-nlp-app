@@ -4,30 +4,43 @@ import bs4
 import ctrl
 import json
 
+
 app = Flask('app')
+
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/page', methods=['GET', 'POST'])
-def page():
+
+@app.route('/aylien', methods=['GET', 'POST'])
+def aylien():
     data = json.loads(request.data)
-    for key, value in data['apis']['aylien'].iteritems():
+    resp = {}
+    for key, value in data['analysis'].iteritems():
         if value:
-            print 'alyien has analysis: ', key
-            #aylien = ctrl.aylien(key, data['text'])
-    for key, value in data['apis']['bitext'].iteritems():
+            resp[key] = ctrl.aylien(str(key), str(data['text']))
+    return json.dumps(resp), 200
+
+
+@app.route('/bitext', methods=['GET', 'POST'])
+def bitext():
+    data = json.loads(request.data)
+    resp = {}
+    for key, value in data['analysis'].iteritems():
         if value:
-            print 'bitext has analysis: ', key
-            #bitext = ctrl.bitext(key, data['text'])
-    for key, value in data['apis']['rosette'].iteritems():
+            resp[key] = ctrl.aylien(str(key), str(data['text']))
+    return json.dumps(resp), 200
+
+
+@app.route('/rosette', methods=['GET', 'POST'])
+def rosette():
+    data = json.loads(request.data)
+    resp = {}
+    for key, value in data['analysis'].iteritems():
         if value:
-            print 'rosette has analysis: ', key
-            #rosette = ctrl.rosette(key, ['text'])
-    print 'aylien: ', aylien
-    print 'bitext: ', bitext
-    print 'rosette: ', rosette
-    return 'yep', 200
+            resp[key] = ctrl.aylien(str(key), str(data['text']))
+    return json.dumps(resp), 200
+
 
 app.run(host='127.0.0.1', port=8080, debug=True)
