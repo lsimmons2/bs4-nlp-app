@@ -1,10 +1,12 @@
 angular.module('App', [])
 .controller('MainController', function($scope, $http){
 
-  $scope.text = 'the owls are not what they seem'
+  $scope.text = 'the owls are not what they seem';
+  $scope.aylien = {};
+  $scope.bitext = {};
+  $scope.rosette = {};
 
-  $scope.submitAylien = function(){
-    if($scope.form.$valid){
+  function submitAylien(){
       var data = {
         text: $scope.text,
         analysis: $scope.aylien
@@ -15,11 +17,9 @@ angular.module('App', [])
         }, function(resp){
           console.log('fail: ', resp);
         })
-    }
   }
 
-  $scope.submitBitext = function(){
-    if($scope.form.$valid){
+  function submitBitext(){
       var data = {
         text: $scope.text,
         analysis: $scope.bitext
@@ -30,11 +30,9 @@ angular.module('App', [])
         }, function(resp){
           console.log('fail: ', resp);
         })
-    }
   }
 
-  $scope.submitRosette = function(){
-    if($scope.form.$valid){
+  function submitRosette(){
       var data = {
         text: $scope.text,
         analysis: $scope.rosette
@@ -46,29 +44,21 @@ angular.module('App', [])
         }, function(resp){
           console.log('fail: ', resp);
         })
-    }
   }
 
   $scope.submit = function(){
-
-  }
-
-  $scope.submitText = function(){
-    if($scope.form.$valid){
-      var data = {
-        text: $scope.text,
-        apis: {
-          rosette: $scope.rosette,
-          aylien: $scope.aylien,
-          bitext: $scope.bitext
-        }
-      }
-      $http.post('/page', data)
-      .then(function(resp){
-        console.log('success resp: ', resp);
-      }, function(resp){
-        console.log('fail resp: ', resp);
-      })
+    if($scope.aylienCheck && $scope.aylien.sentiment || $scope.aylienCheck && $scope.aylien.concepts || $scope.aylienCheck && $scope.aylien.classification){
+      console.log('submitAylien');
+      submitAylien();
+    }
+    if($scope.bitextCheck && $scope.bitext.sentiment || $scope.bitextCheck && $scope.bitext.concepts || $scope.bitextCheck && $scope.bitext.classification){
+      console.log('submitBitext');
+      submitBitext();
+    }
+    if($scope.rosetteCheck && $scope.rosette.sentiment || $scope.rosetteCheck && $scope.rosette.concepts || $scope.rosetteCheck && $scope.rosette.classification){
+      console.log('submitRosette');
+      submitRosette();
     }
   }
+
 })
