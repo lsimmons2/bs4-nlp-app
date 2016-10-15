@@ -7,45 +7,56 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='main.js') }}"></script>
+    <link rel="stylesheet" href="./static/style.css">
   </head>
   <body ng-app="App">
     <div class="container" ng-view ng-controller="MainController">
       <h2>Stack NLP App</h2>
       <form name="form">
+
         <div class="form-group">
           <label>Input Text</label>
           <input class="form-control" placeholder="Enter Text" type="text" ng-model="text"></input>
         </div>
-        <div class="form-group" ng-class="{'has-error': form.aylienCheck && !aylien.sentiment && !aylien.concepts && !aylien.classification}">
-          <h3>Aylien</h3>
-          <input class="form-control" name="aylienCheck" type="checkbox" ng-model="aylienCheck">
-          <ul>
+
+        <div class="api-container form-group" ng-class="{'has-error': form.aylienCheck && !aylien.sentiment && !aylien.concepts && !aylien.classification}">
+          <div class="api-header">
+            <h3 class="api-title">Aylien</h3>
+            <input class="check" name="aylienCheck" type="checkbox" ng-model="aylienCheck">
+          </div>
+          <ul class="api-dropdown" ng-show="aylienCheck">
             <li>Sentiment<input name="aylien.sentiment" type="checkbox" ng-model="aylien.sentiment"></li>
             <li>Concepts<input name="aylien.concepts" type="checkbox" ng-model="aylien.concepts"></li>
             <li>Classification<input name="aylien.classification" type="checkbox" ng-model="aylien.classification"></li>
           </ul>
         </div>
-        <div class="form-group">
-          <h3>Bitext</h3>
-          <input class="form-control" name="bitextCheck" type="checkbox" ng-model="bitextCheck">
-          <ul>
+
+        <div class="api-container form-group">
+          <div class="api-header">
+            <h3 class="api-title">Bitext</h3>
+            <input class="check" name="bitextCheck" type="checkbox" ng-model="bitextCheck">
+          </div>
+          <ul class="api-dropdown" ng-show="bitextCheck">
             <li>Sentiment<input name="bitext.sentiment" type="checkbox" ng-model="bitext.sentiment"></li>
             <li>Concepts<input name="bitext.concepts" type="checkbox" ng-model="bitext.concepts"></li>
             <li>Classification<input name="bitext.classification" type="checkbox" ng-model="bitext.classification"></li>
           </ul>
         </div>
-        <div class="form-group">
-          <h3>Rosette</h3>
-          <input class="form-control" name="rosetteCheck" type="checkbox" ng-model="rosetteCheck">
-          <ul>
+
+        <div class="api-container form-group">
+          <div class="api-header">
+            <h3 class="api-title">Rosette</h3>
+            <input class="check" name="rosetteCheck" type="checkbox" ng-model="rosetteCheck">
+          </div>
+          <ul class="api-dropdown" ng-show="rosetteCheck">
             <li>Sentiment<input name="rosette.sentiment" type="checkbox" ng-model="rosette.sentiment"></li>
             <li>Concepts<input name="rosette.concepts" type="checkbox" ng-model="rosette.concepts"></li>
             <li>Classification<input name="rosette.classification" type="checkbox" ng-model="rosette.classification"></li>
           </ul>
         </div>
-        <div class="form-group">
-          <input class="form-control" value="Submit" type="submit" ng-click="submit()"></input>
-        </div>
+
+        <input class="form-control" value="Submit" type="submit" ng-click="submit()"></input>
+
       </form>
     </div>
   </body>
