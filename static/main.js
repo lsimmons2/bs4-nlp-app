@@ -5,6 +5,8 @@ angular.module('App', [])
   $scope.aylien = {};
   $scope.bitext = {};
   $scope.rosette = {};
+  $scope.results = [];
+
 
   function submitAylien(){
       var data = {
@@ -13,9 +15,10 @@ angular.module('App', [])
       }
       $http.post('/aylien', data)
         .then(function(resp){
-          console.log('success: ', resp);
+          console.log('aylien success: ', resp);
+          $scope.results.push(resp.data);          console.log('$scope.results: ', $scope.results);
         }, function(resp){
-          console.log('fail: ', resp);
+          console.log('aylien fail: ', resp);
         })
   }
 
@@ -26,9 +29,11 @@ angular.module('App', [])
       }
       $http.post('/bitext', data)
         .then(function(resp){
-          console.log('success: ', resp);
+          console.log('bitext success: ', resp);
+          $scope.results.push(resp.data);
+          console.log('$scope.results: ', $scope.results);
         }, function(resp){
-          console.log('fail: ', resp);
+          console.log('bitext fail: ', resp);
         })
   }
 
@@ -40,11 +45,17 @@ angular.module('App', [])
       console.log('data: ', data);
       $http.post('/rosette', data)
         .then(function(resp){
-          console.log('success: ', resp);
+          console.log('rosette success: ', resp);
+          for(var key in resp.data){
+            resp.data[key] = JSON.parse(resp.data[key]);
+          }
+          $scope.results.push(resp.data);
+          console.log('$scope.results: ', $scope.results);
         }, function(resp){
-          console.log('fail: ', resp);
+          console.log('rosette fail: ', resp);
         })
   }
+
 
   $scope.submit = function(){
     if($scope.aylienCheck && $scope.aylien.sentiment || $scope.aylienCheck && $scope.aylien.concepts || $scope.aylienCheck && $scope.aylien.classification){
@@ -61,4 +72,7 @@ angular.module('App', [])
     }
   }
 
+})
+.config(function($interpolateProvider){
+  $interpolateProvider.startSymbol('//').endSymbol('//');
 })

@@ -15,3 +15,7 @@
 .api-dropdown {
   list-style-type: none;
 }
+
+.api-results {
+  width: 33%;
+}
