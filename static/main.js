@@ -5,7 +5,7 @@ angular.module('App', [])
   $scope.aylien = {};
   $scope.bitext = {};
   $scope.rosette = {};
-  $scope.results = [];
+  $scope.results = {};
 
 
   function submitAylien(){
@@ -19,13 +19,12 @@ angular.module('App', [])
           for(var key in resp.data){
             resp.data[key] = JSON.parse(resp.data[key]);
           }
-          $scope.results.push(resp.data);
+          $scope.results.aylien = resp.data;
+          $scope.results.aylien.error = false;
         })
         .catch(function(resp){
-          var error = {
-            error: 'Aylien'
-          };
-          $scope.results.push(error);
+          $scope.results.aylien = {};
+          $scope.results.aylien.error = true;
         });
   };
 
@@ -39,13 +38,12 @@ angular.module('App', [])
           for(var key in resp.data){
             resp.data[key] = JSON.parse(resp.data[key]);
           }
-          $scope.results.push(resp.data);
+          $scope.results.bitext = resp.data;
+          $scope.results.bitext.error = false;
         })
         .catch(function(resp){
-          var error = {
-            error: 'Bitext'
-          };
-          $scope.results.push(error);
+          $scope.results.bitext = {};
+          $scope.results.bitext.error = true;
         })
   }
 
@@ -56,17 +54,15 @@ angular.module('App', [])
     }
     $http.post('/rosette', data)
       .then(function(resp){
-        $scope.rosetteError = false;
         for(var key in resp.data){
           resp.data[key] = JSON.parse(resp.data[key]);
         }
-        $scope.results.push(resp.data);
+        $scope.results.rosette = resp.data;
+        $scope.results.rosette.error = false;
       })
       .catch(function(resp){
-        var error = {
-          error: 'Rosette'
-        };
-        $scope.results.push(error);
+        $scope.results.rosette = {};
+        $scope.results.rosette.error = true;
       })
   }
 

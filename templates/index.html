@@ -61,19 +61,19 @@
       </form>
 
 
-      <div class="api-results-container" ng-repeat="result in results track by $index">
+      <div class="api-results-container" ng-repeat="(api, data) in results track by $index">
 
-        <div ng-repeat="(type, content) in result track by $index" ng-hide="result.error">
-          <label>//type// analysis:</label>
-          <ul>
+        <div ng-repeat="(type, content) in data track by $index">
+          <label ng-hide="type === 'error'">//type// analysis:</label>
+          <ul ng-hide="type === 'error'">
             <li ng-repeat="(metric, value) in content track by $index">
               <span>//metric//: </span><span>//value//</span>
             </li>
           </ul>
         </div>
 
-        <div class="alert alert-info" ng-show="result.error">
-          Error retrieving //result.error// results
+        <div class="alert alert-info" ng-show="data.error">
+          <p>Error retrieving //api// results</p>
         </div>
 
       </div>
