@@ -16,6 +16,9 @@
   list-style-type: none;
 }
 
-.api-results {
+
+.api-results-container {
+  float: left;
+  display: inline-block;
   width: 33%;
 }

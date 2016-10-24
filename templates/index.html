@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./static/style.css">
   </head>
   <body ng-app="App">
+
     <div class="container" ng-view ng-controller="MainController">
       <h2>Stack NLP App</h2>
       <form name="form">
@@ -58,18 +59,25 @@
         <input class="form-control" value="Submit" type="submit" ng-click="submit()"></input>
 
       </form>
-      <div class="api-results" ng-repeat="result in results track by $index">
-        sah
-        <div ng-repeat="(type, content) in result track by $index">
+
+
+      <div class="api-results-container" ng-repeat="result in results track by $index">
+
+        <div ng-repeat="(type, content) in result track by $index" ng-hide="result.error">
           <label>//type// analysis:</label>
           <ul>
-            <li ng-repeat="(key, value) in content track by $index">
-              //key: // //value//
+            <li ng-repeat="(metric, value) in content track by $index">
+              <span>//metric//: </span><span>//value//</span>
             </li>
           </ul>
-          <p>//analysis//</p>
         </div>
+
+        <div class="alert alert-info" ng-show="result.error">
+          Error retrieving //result.error// results
+        </div>
+
       </div>
+
     </div>
   </body>
 </html>
