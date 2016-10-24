@@ -16,11 +16,13 @@ angular.module('App', [])
       $http.post('/aylien', data)
         .then(function(resp){
           console.log('aylien success: ', resp);
-          $scope.results.push(resp.data);          console.log('$scope.results: ', $scope.results);
-        }, function(resp){
-          console.log('aylien fail: ', resp);
+          $scope.results.push(resp.data);
+          console.log('$scope.results: ', $scope.results);
         })
-  }
+        .catch(function(resp){
+          console.log('aylien fail: ', resp);
+        });
+  };
 
   function submitBitext(){
       var data = {
@@ -32,7 +34,8 @@ angular.module('App', [])
           console.log('bitext success: ', resp);
           $scope.results.push(resp.data);
           console.log('$scope.results: ', $scope.results);
-        }, function(resp){
+        })
+        .catch(function(resp){
           console.log('bitext fail: ', resp);
         })
   }
@@ -51,7 +54,8 @@ angular.module('App', [])
           }
           $scope.results.push(resp.data);
           console.log('$scope.results: ', $scope.results);
-        }, function(resp){
+        })
+        .catch(function(resp){
           console.log('rosette fail: ', resp);
         })
   }
