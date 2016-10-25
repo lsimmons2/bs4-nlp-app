@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
 import requests
 import bs4
 import ctrl
@@ -9,8 +9,10 @@ app = Flask('app')
 
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+@app.route('/apis')
+def index(**kwargs):
+    #return render_template('index.html')
+    return make_response(open('templates/index.html').read())
 
 
 @app.route('/aylien', methods=['GET', 'POST'])
@@ -43,4 +45,4 @@ def rosette():
     return json.dumps(resp), 200
 
 
-app.run(host='127.0.0.1', port=8080, debug=True)
+app.run(host='127.0.0.1', port=9000, debug=True)

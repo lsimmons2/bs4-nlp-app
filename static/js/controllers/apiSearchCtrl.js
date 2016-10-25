@@ -1,5 +1,5 @@
-angular.module('App', [])
-.controller('MainController', function($scope, $http){
+angular.module('apiSearchController', [])
+.controller('ApiSearchController', function($scope, $http){
 
   $scope.text = 'the owls are not what they seem';
   $scope.aylien = {};
@@ -45,7 +45,7 @@ angular.module('App', [])
           $scope.results.bitext = {};
           $scope.results.bitext.error = true;
         })
-  }
+  };
 
   function submitRosette(){
     var data = {
@@ -64,7 +64,7 @@ angular.module('App', [])
         $scope.results.rosette = {};
         $scope.results.rosette.error = true;
       })
-  }
+  };
 
 
   $scope.submit = function(){
@@ -77,9 +77,6 @@ angular.module('App', [])
     if($scope.rosetteCheck && $scope.rosette.sentiment || $scope.rosetteCheck && $scope.rosette.concepts || $scope.rosetteCheck && $scope.rosette.classification){
       submitRosette();
     }
-  }
+  };
 
-})
-.config(function($interpolateProvider){
-  $interpolateProvider.startSymbol('//').endSymbol('//');
-})
+});
